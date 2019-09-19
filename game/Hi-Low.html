@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang='en'>
+
+<head>
+    <title>Hi-Low</title>
+    <meta charset='utf-8'>
+</head>
+
+<body>
+    <label for='number'>Guess a nmuber between 0 and 100: </label>
+    <input type='text' name='number' id='number'>
+    <button>Check</button>
+
+    <script>
+        
+        const  RandomNumber = Math.floor(Math.random() * Math.floor(100));
+        function GuessNumber() {
+
+            console.log('Random Number' + RandomNumber);
+            
+            let GuessedNumber = document.getElementById('number').value;
+
+            console.log(GuessedNumber);
+
+            let newParagraph = document.createElement('p');
+
+            if (sessionStorage.clickcount) {
+                sessionStorage.clickcount = Number(sessionStorage.clickcount) + 1;
+                console.log('Count: '+sessionStorage.clickcount);
+            } else {
+                sessionStorage.clickcount = 1;
+            }
+
+
+            if (sessionStorage.clickcount <= 3){
+                if (RandomNumber == GuessedNumber) {
+                    newParagraph.textContent = 'Your guess is correct!';
+                    console.log('inside if');
+                    sessionStorage.clear();
+                } else {
+                    newParagraph.textContent = 'Your guess is incorrect!';
+                    console.log('inside else');
+                }
+            }else{
+                newParagraph.textContent = 'You exceed attempt limitation';
+                sessionStorage.clear();
+            }
+
+            document.body.appendChild(newParagraph);
+        }
+
+        const button = document.querySelector('button');
+        button.addEventListener('click', GuessNumber);
+    </script>
+
+</body>
+
+</html>
