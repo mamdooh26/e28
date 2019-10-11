@@ -14,9 +14,7 @@ let app = new Vue({
     },
     methods: {
         GuessNumber: function () {
-            //this.correct = this.userInput == this.RandomNumber
             this.feedback = true
-            //this.failed = false
             if (this.attempt <= 0){
                 this.gameOver = true
                 this.high = false
