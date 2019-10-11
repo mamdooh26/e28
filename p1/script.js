@@ -42,7 +42,7 @@ let app = new Vue({
             this.high = false
             this.low = false
             this.gameOver = false
-            this.failed = false
+            this.failed = null
             this.attempt = 3
             this.RandomNumber = this.RandomNumber = Math.floor(Math.random() * Math.floor(100));
         }
