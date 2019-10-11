@@ -14,12 +14,14 @@ let app = new Vue({
     },
     methods: {
         GuessNumber: function () {
-            this.correct = this.userInput == this.RandomNumber;
-            this.feedback = true;
-            if (this.attempt <= 1){
+            //this.correct = this.userInput == this.RandomNumber
+            this.feedback = true
+            //this.failed = false
+            if (this.attempt <= 0){
                 this.gameOver = true
                 this.high = false
                 this.low = false 
+                this.failed = true
             }else
             {
                 if(this.userInput > this.RandomNumber && this.attempt > 0){
@@ -34,6 +36,10 @@ let app = new Vue({
                     this.failed = true
                     this.attempt --
                 }
+                else if(this.userInput == this.RandomNumber){
+                    this.correct = true
+                    this.failed = false
+                }
         }
         },
 
@@ -42,7 +48,7 @@ let app = new Vue({
             this.high = false
             this.low = false
             this.gameOver = false
-            this.failed = null
+            this.failed = false
             this.attempt = 3
             this.RandomNumber = this.RandomNumber = Math.floor(Math.random() * Math.floor(100));
         }
