@@ -1,21 +1,10 @@
-Vue.component('round-detail',{
-    data: function(){
-        return {
-
-        }
-    },
-    template: `<div>
-                    <ul>
-                        <li>Round#: ??</li>
-                        <li>Winner: ??</li>
-                    </ul>
-                </div>
-    `,
-    //methods:
-});
-
+import Vue from 'vue';
+import RoundDetail from './components/RoundDetail.vue';
 let app = new Vue({
     el: '#app',
+    components: {
+        'round-detail': RoundDetail
+    },
     data: {
         userInput:null,
         failed: false,
@@ -25,7 +14,8 @@ let app = new Vue({
         high: false,
         feedback: false,
         correct: false,
-        RandomNumber: null
+        RandomNumber: null,
+        rounds:[],
     },
     methods: {
         GuessNumber: function () {
@@ -39,6 +29,7 @@ let app = new Vue({
             {
                 if(this.userInput > this.RandomNumber && this.attempt > 0){
                     this.high = true
+                    this.high12 = this.high
                     this.low = false
                     this.failed = true 
                     this.attempt --   
@@ -52,8 +43,16 @@ let app = new Vue({
                 else if(this.userInput == this.RandomNumber){
                     this.correct = true
                     this.failed = false
+                    this.low = false
+                    this.high = false
+                    this.gameOver = false
                 }
-        }
+
+
+            }
+            this.rounds.push({
+                attemptNumber: this.attempt
+            })
         },
 
         PlayAgain: function () {
@@ -64,7 +63,7 @@ let app = new Vue({
             this.failed = false
             this.attempt = 3
             this.RandomNumber = this.RandomNumber = Math.floor(Math.random() * Math.floor(100));
-        }
+        },
     },
 
     created () {

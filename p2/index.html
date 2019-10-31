@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang='en'>
+
+<head>
+
+    <title>Hi-Low</title>
+    <meta charset='utf-8'>
+
+    <script src='js/script.js' defer></script>
+
+</head>
+
+<body>
+    <h1>Hi-Low</h1>
+    <div id='app' v-cloak>
+        
+        <div>
+            <label for='userInput'>Guess a nmuber between 0 and 100:</label>
+            <input type='text' id='userInput' v-model='userInput' @keyup.enter='GuessNumber'>
+            <button @click='GuessNumber' >Guess Number</button>
+        </div>
+
+        <round-detail :class="{ pass : correct, fail: failed }">
+
+            <template v-slot:win v-if='correct'>
+                You got it! Nice work. 
+                <button @click='PlayAgain'>Play again</button>
+            </template>
+
+            <template v-slot:high v-if='high'>
+                Sorry, you guessed higher.You have {{ attempt }} remaining
+            </template>
+
+            <template v-slot:low v-if='low'>
+                Sorry, you guessed lower.You have {{ attempt }} remaining
+            </template>
+                
+            <template v-slot:over v-if='gameOver'>
+                    Sorry, game is over.
+                <button @click='PlayAgain'>Play again</button>
+            </template>
+
+        </round-detail>
+
+    </div>
+
+</body>
+
+</html>
