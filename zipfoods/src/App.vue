@@ -1,16 +1,33 @@
 <template>
   <div id="app">
     <img id='logo' alt="ZipFoods logo" src="./assets/images/zipfoods-logo.png">
-    <p>ZipFoods is your one-stop-shop for convenient online grocery shopping in the greater Boston area</p>
+    <nav>
+        <ul>
+            <li v-for='link in links' :key='link'>
+                <router-link exact :to='paths[link]'>{{ link }}</router-link>
+            </li>
+        </ul>
+    </nav>
+    <router-view></router-view>
   </div>
 </template>
 
 <script>
+import { products } from './products'
 
 export default {
   name: 'app',
-  components: {
-
+  components: {},
+  data: function(){
+    return {
+      links: ['home', 'products', 'categories'],
+      paths: {
+          home: '/',
+          products: '/products',
+          categories: '/categories'
+      },
+      products: products
+    };
   }
 }
 </script>
