@@ -10,16 +10,23 @@
 </template>
 
 <script>
-import ShowProduct from './ShowProduct.vue'
-import { products } from './../products'
+import ShowProduct from './../ShowProduct.vue'
+import * as app from './../../app.js';
+
 export default {
-    name: 'ShowProducts',
+    name: 'ProductsPage',
     components: { ShowProduct },
     data: function(){
         return {
-            products: products
+            products: null
         }
+    },
+     mounted(){
+          this.products = app.axios
+            .get(app.config.api + 'products')
+            .then(response => (this.products = response.data));
     }
+    
 };
 </script>
 
